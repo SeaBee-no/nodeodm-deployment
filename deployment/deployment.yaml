@@ -19,11 +19,11 @@ spec:
         image: opendronemap/nodeodm:latest
         resources:
           requests:
-            memory: "5G"
-            cpu: "1"
-          limits:
-            memory: "10G"
+            memory: "16G"
             cpu: "2"
+          limits:
+            memory: "32G"
+            cpu: "4"
         ports:
           - name: http
             containerPort: 3000
