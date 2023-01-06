@@ -1,0 +1,15 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+namespace: seabee-ns9879k
+
+resources:
+- ./deployment.yaml
+- ./service.yaml
+- ./network-policy.yaml
+
+configMapGenerator:
+  - name: nodeodm
+
+
+generatorOptions:
+  disableNameSuffixHash: true
