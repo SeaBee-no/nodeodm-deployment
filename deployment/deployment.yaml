@@ -19,11 +19,11 @@ spec:
         image: opendronemap/nodeodm:latest
         resources:
           requests:
-            memory: "500M"
-            cpu: "200m"
-          limits:
-            memory: "1G"
+            memory: "5G"
             cpu: "1"
+          limits:
+            memory: "10G"
+            cpu: "2"
         ports:
           - name: http
             containerPort: 3000
@@ -31,6 +31,10 @@ spec:
         envFrom:
           - configMapRef:
               name: nodeodm
+        volumeMounts:
+        - name: persistence
+          mountPath: /var/www/data
+          subPath: data/nodeodm-workdir
         livenessProbe:
           httpGet:
             path: /
@@ -43,3 +47,7 @@ spec:
             path: /
             port: 3000
           periodSeconds: 30
+      volumes:
+      - name: persistence
+        persistentVolumeClaim:
+          claimName: 71aea088-9e00-4f3c-adf7-0579fe1c38b8
