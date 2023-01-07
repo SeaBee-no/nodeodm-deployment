@@ -14,16 +14,40 @@ spec:
       labels:
         app: nodeodm
     spec:
+      securityContext:
+        fsGroup: 219879
+      initContainers:
+      - name: busybox
+        image: registry.uninett.no/public/busybox:1.33.1-glibc
+        imagePullPolicy: IfNotPresent
+        args:
+          - /bin/sh
+          - -c
+          - -x
+          - "mkdir -p /data/nodeodm-workdir && \
+             chmod g+wx /data/nodeodm-workdir" 
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 219879
+        volumeMounts:
+        - name: persistence
+          mountPath: /data
+          subPath: data
       containers:
       - name: nodeodm
-        image: opendronemap/nodeodm:latest
+        image: opendronemap/nodeodm:gpu
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 219879
         resources:
           requests:
             memory: "16G"
-            cpu: "2"
+            cpu: "4"
+            nvidia.com/gpu: 1
           limits:
             memory: "32G"
-            cpu: "4"
+            cpu: "8"
+            nvidia.com/gpu: 1
         ports:
           - name: http
             containerPort: 3000
