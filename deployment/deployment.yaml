@@ -20,10 +20,10 @@ spec:
         resources:
           requests:
             memory: "16G"
-            cpu: "2"
+            cpu: "1"
           limits:
             memory: "32G"
-            cpu: "4"
+            cpu: "12"
         ports:
           - name: http
             containerPort: 3000
