@@ -17,15 +17,15 @@ spec:
       containers:
       - name: nodeodm
         image: opendronemap/nodeodm:latest
-        args: ["-q", "2", "--max-concurrency", "31"]
+        args: ["-q", "2", "--max-concurrency", "15"]
         imagePullPolicy: IfNotPresent
         resources:
           requests:
-            memory: "48G"
-            cpu: "4"
+            memory: "32G"
+            cpu: "2"
           limits:
-            memory: "96G"
-            cpu: "32"
+            memory: "64G"
+            cpu: "16"
         ports:
           - name: http
             containerPort: 3000
