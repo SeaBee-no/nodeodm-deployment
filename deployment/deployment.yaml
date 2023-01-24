@@ -17,6 +17,8 @@ spec:
       containers:
       - name: nodeodm
         image: opendronemap/nodeodm:latest
+        args: ["-q", "2", "--max-concurrency", "31"]
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             memory: "48G"
